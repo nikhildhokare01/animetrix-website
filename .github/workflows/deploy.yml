@@ -35,8 +35,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
-
+        run: npm install
       - name: Build project (This is where your old error was)
         run: npm run build # This command creates the 'dist' folder
 

@@ -3,123 +3,246 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anime UI Demo</title>
+    <title>Animetrix Festival</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
+        /* Base and Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            overflow-x: hidden;
             background: #000;
+            overflow-x: hidden;
             color: white;
+            font-family: "Oxanium", sans-serif; /* Replaces font-[Oxanium] */
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* Keyframes */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
         }
 
-        /* 3D Parallax Background */
-        .bg {
-            position: fixed;
+        /* Navbar Styles (Replaces Tailwind classes) */
+        .navbar {
             width: 100%;
-            height: 100%;
-            background-image: url("https://wallpapercave.com/wp/wp4676583.jpg");
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-            animation: floatBg 20s linear infinite alternate;
+            padding: 1rem 1.75rem; /* px-7 py-4 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 50;
+            /* Simulating bg-black/60 and backdrop-blur-md */
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+        }
+        .navbar .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* gap-3 */
+        }
+        .navbar img {
+            width: 5rem; /* w-20 */
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 1.25rem; /* gap-5 */
+            font-size: 1.25rem; /* text-xl */
         }
 
-        @keyframes floatBg {
-            0% { transform: scale(1) translateY(0px); }
-            100% { transform: scale(1.1) translateY(-20px); }
-        }
-
-        /* Logo */
-        .logo {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .logo img {
-            width: 120px;
-            animation: fadeIn 1.4s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Center Container */
-        .container {
-            text-align: center;
-            margin-top: 80px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        /* Anime Buttons */
-        .btn {
+        /* Neon Button Styles */
+        .neon-button {
             display: inline-block;
-            padding: 15px 40px;
-            margin: 15px;
-            background: linear-gradient(45deg, #ff0077, #ff6600);
-            border-radius: 50px;
-            color: white;
-            text-decoration: none;
+            padding: 12px 30px;
+            border: 2px solid #ff00ff;
+            color: #ff00ff;
+            border-radius: 10px;
+            transition: 0.25s;
             font-size: 20px;
-            font-weight: 600;
-            transition: 0.3s;
+            background: none;
+            cursor: pointer;
+        }
+        .neon-button:hover {
+            background: #ff00ff;
+            color: black;
+            box-shadow: 0 0 20px #ff00ff;
+        }
+
+        /* Parallax Background */
+        .parallax-layer {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            top: -5%; /* Center the 110% layer */
+            left: -5%; /* Center the 110% layer */
+            pointer-events: none;
+            object-fit: cover;
+            opacity: 0.5; /* Added slight opacity for better UI visibility */
+            z-index: 0; /* Ensures it's behind the content */
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* Home Section Styles */
+        .home-section {
+            padding-top: 6rem; /* pt-24 */
             position: relative;
             overflow: hidden;
         }
-
-        .btn:hover {
-            transform: scale(1.1) rotate(-1deg);
-            box-shadow: 0px 0px 20px #ff0077;
+        .hero-content {
+            text-align: center;
+            padding: 8rem 0; /* py-32 */
+            position: relative;
+            z-index: 10;
+        }
+        .hero-content h1 {
+            font-size: 3.75rem; /* text-6xl */
+            font-weight: 700; /* font-bold */
+            color: #d1b4ff; /* Approximate purple-400 */
+            text-shadow: 0 0 20px #a600ff; /* drop-shadow-[0_0_20px_#a600ff] */
+        }
+        .hero-content p {
+            font-size: 1.25rem; /* text-xl */
+            margin-top: 1rem; /* mt-4 */
+            color: #ccc; /* text-gray-300 */
+        }
+        .hero-content button {
+            margin-top: 2.5rem; /* mt-10 */
         }
 
-        .btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
+        /* Character Cards Grid */
+        .character-cards {
+            display: grid;
+            grid-template-columns: 1fr; /* grid-cols-1 */
+            gap: 1.5rem; /* gap-6 */
+            padding: 2.5rem; /* p-10 */
+            position: relative;
+            z-index: 10;
+        }
+        @media (min-width: 768px) {
+            .character-cards {
+                grid-template-columns: repeat(3, 1fr); /* md:grid-cols-3 */
+            }
+        }
+        .char-card {
+            background-color: rgba(255, 255, 255, 0.1); /* bg-white/10 */
+            padding: 1.25rem; /* p-5 */
+            border-radius: 0.75rem; /* rounded-xl */
+            text-align: center;
+            transition: background-color 0.2s; /* transition */
+            display: block;
+        }
+        .char-card:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* hover:bg-white/20 */
+        }
+        .char-card img {
             width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: skewX(-30deg);
-            transition: 0.5s;
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+        .char-card h2 {
+            font-size: 1.5rem; /* text-2xl */
+            margin-top: 0.75rem; /* mt-3 */
         }
 
-        .btn:hover::before {
-            left: 100%;
+        /* Page Management (Simulating Routing) */
+        .page-content {
+            display: none;
+            min-height: 100vh;
+        }
+        /* Show the Home page by default */
+        #home-page {
+            display: block;
+        }
+        /* Show the target page when its ID is in the URL hash */
+        :target {
+            display: block;
+        }
+        /* Hide the default home page when any other target is active */
+        :target ~ #home-page {
+            display: none;
         }
 
-        /* Smooth Page Transition */
-        .fade-page {
-            opacity: 0;
-            animation: fadePage 1s forwards;
+        /* Character Page Styles */
+        .char-page {
+            padding-top: 7rem; /* pt-28 */
+            padding: 2.5rem; /* p-10 */
+            text-align: center;
         }
-
-        @keyframes fadePage {
-            to { opacity: 1; }
+        .char-page img {
+            display: block;
+            margin: 0 auto;
+            width: 20rem; /* w-80 */
+        }
+        .char-page h1 {
+            font-size: 3rem; /* text-5xl */
+            margin-top: 1.25rem; /* mt-5 */
+            color: #c4b5fd; /* Approximate purple-300 */
+            text-shadow: 0 0 20px #a600ff;
+        }
+        .char-page p {
+            font-size: 1.25rem; /* text-xl */
+            margin-top: 0.75rem; /* mt-3 */
+            color: #ccc; /* text-gray-300 */
         }
     </style>
 </head>
 
-<body class="fade-page">
-    <div class="bg"></div>
+<body>
 
-    <!-- LOGO -->
-    <div class="logo">
-        <img src="https://i.imgur.com/foK8WZp.png" alt="Logo" />
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="./logo.png" alt="Animetrix Logo" />
+        </div>
+        <div class="nav-links">
+            <a href="#home-page">Home</a>
+        </div>
+    </nav>
+
+    <div id="home-page" class="page-content home-section">
+
+        <img src="./luffy.png" alt="Parallax Background" class="parallax-layer" />
+
+        <section class="hero-content">
+            <h1>Animetrix Festival 2025</h1>
+            <p>Where animation meets imagination</p>
+            <button class="neon-button">Enter Realm</button>
+        </section>
+
+        <div class="character-cards">
+            <a href="#luffy-page" class="char-card">
+                <img src="./luffy.png" alt="Luffy" />
+                <h2>Monkey D. Luffy</h2>
+            </a>
+            <a href="#gojo-page" class="char-card">
+                <img src="./gojo.png" alt="Gojo" />
+                <h2>Gojo Satoru</h2>
+            </a>
+            <a href="#naruto-page" class="char-card">
+                <img src="./naruto.png" alt="Naruto" />
+                <h2>Naruto Uzumaki</h2>
+            </a>
+        </div>
     </div>
 
-    <!-- MAIN BUTTONS -->
-    <div class="container">
-        <a href="#home" class="btn">Home</a>
-        <a href="#about" class="btn">About</a>
-        <a href="#characters" class="btn">Characters</a>
-        <a href="#contact" class="btn">Contact</a>
+    <div id="luffy-page" class="page-content char-page">
+        <img src="./luffy.png" alt="Monkey D. Luffy" />
+        <h1>Monkey D. Luffy</h1>
+        <p>Future Pirate King.</p>
     </div>
+
+    <div id="gojo-page" class="page-content char-page">
+        <img src="./gojo.png" alt="Gojo Satoru" />
+        <h1>Gojo Satoru</h1>
+        <p>Strongest Sorcerer.</p>
+    </div>
+
+    <div id="naruto-page" class="page-content char-page">
+        <img src="./naruto.png" alt="Naruto Uzumaki" />
+        <h1>Naruto Uzumaki</h1>
+        <p>Hokage. Believe it!</p>
+    </div>
+
 </body>
 </html>

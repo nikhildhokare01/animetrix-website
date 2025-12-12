@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # Important: Allows the action to write to the 'gh-pages' branch
   pages: write
   id-token: write
 
@@ -24,13 +24,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      - name: Install dependencies (Uses your updated package.json)
         run: npm install
 
-      - name: Build project (runs 'npm run build')
+      - name: Build project (runs 'npm run build' which creates the 'dist' folder)
         run: npm run build
-
-      # --- Deployment Steps ---
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

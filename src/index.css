@@ -1,0 +1,35 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #000;
+  overflow-x: hidden;
+}
+.neon-button {
+  padding: 12px 30px;
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  border-radius: 10px;
+  transition: 0.25s;
+  font-size: 20px;
+  background: none;
+  cursor: pointer;
+}
+.neon-button:hover {
+  background: #ff00ff;
+  color: black;
+  box-shadow: 0 0 20px #ff00ff;
+}
+.parallax-layer {
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  object-fit: cover;
+  opacity: 0.5; 
+}
+/* Add Tailwind-like CSS utility classes here or install Tailwind */
+.text-6xl { font-size: 3.75rem; }
+.font-bold { font-weight: 700; }
+.text-purple-400 { color: #c4b5fd; } 
+/* ...and so on for all your utility classes */

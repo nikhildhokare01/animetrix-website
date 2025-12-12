@@ -1,52 +1,47 @@
 # .github/workflows/deploy.yml
-name: Deploy static content to Pages
+name: Build and Deploy React Website
 
 on:
   push:
-    branches: ["main"] # The branch you push your source code to
+    branches: ["main"]
 
   workflow_dispatch:
 
-# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
-concurrency:
-  cancel-in-progress: true
-  group: "pages"
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Use a stable Node.js version
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
+      - name: Build project (runs 'npm run build')
         run: npm run build
+
+      # --- Deployment Steps ---
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: vite
 
-      - name: Upload artifact
+      - name: Upload artifact (The compiled 'dist' folder)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # The folder created by 'npm run build'
+          path: './dist' 
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages

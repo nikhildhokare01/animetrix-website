@@ -1,7 +1,7 @@
 {
   "name": "animetrix-website",
   "version": "1.0.0",
-  "homepage": "https://<nikhildhokare01>.github.io/animetrix-website/",
+  "homepage": "https://nikhildhokare01.github.io/animetrix-website/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

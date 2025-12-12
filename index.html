@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anime UI Demo</title>
 
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -14,9 +15,6 @@
             overflow-x: hidden;
             background: #000;
             color: white;
-            /* Applying smooth fade to the body for a simple static page */
-            opacity: 0;
-            animation: fadePage 1s forwards;
         }
 
         /* 3D Parallax Background */
@@ -97,19 +95,26 @@
         }
 
         /* Smooth Page Transition */
+        .fade-page {
+            opacity: 0;
+            animation: fadePage 1s forwards;
+        }
+
         @keyframes fadePage {
             to { opacity: 1; }
         }
     </style>
 </head>
 
-<body>
+<body class="fade-page">
     <div class="bg"></div>
 
+    <!-- LOGO -->
     <div class="logo">
         <img src="https://i.imgur.com/foK8WZp.png" alt="Logo" />
     </div>
 
+    <!-- MAIN BUTTONS -->
     <div class="container">
         <a href="#home" class="btn">Home</a>
         <a href="#about" class="btn">About</a>

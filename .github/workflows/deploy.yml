@@ -1,59 +1,31 @@
-# .github/workflows/deploy.yml
-name: Deploy static content to Pages
+# .github/workflows/deploy.yml (Simplified Action)
+name: Deploy to GitHub Pages (Simplified)
 
 on:
-  # Runs on pushes targeting your main branch
   push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches:
+      - main
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  # The Build job runs on an Ubuntu machine to compile your React code
-  build:
+  deployment:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-     - name: Set up Node
+      - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20' # Use a stable version
 
-      - name: Install dependencies
-        run: npm install
-      - name: Build project (This is where your old error was)
-        run: npm run build # This command creates the 'dist' folder
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        
-      - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Install Dependencies and Build
+        run: |
+          npm install
+          npm run build
+          
+      - name: Deploy to gh-pages branch 🚀
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: './dist' # Upload the compiled files
-
-  # The Deploy job takes the artifact and publishes it to GitHub Pages
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

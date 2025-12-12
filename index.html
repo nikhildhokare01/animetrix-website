@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anime UI Demo</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            overflow-x: hidden;
+            background: #000;
+            color: white;
+        }
+
+        /* 3D Parallax Background */
+        .bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://wallpapercave.com/wp/wp4676583.jpg");
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            animation: floatBg 20s linear infinite alternate;
+        }
+
+        @keyframes floatBg {
+            0% { transform: scale(1) translateY(0px); }
+            100% { transform: scale(1.1) translateY(-20px); }
+        }
+
+        /* Logo */
+        .logo {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .logo img {
+            width: 120px;
+            animation: fadeIn 1.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Center Container */
+        .container {
+            text-align: center;
+            margin-top: 80px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Anime Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            margin: 15px;
+            background: linear-gradient(45deg, #ff0077, #ff6600);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 600;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: scale(1.1) rotate(-1deg);
+            box-shadow: 0px 0px 20px #ff0077;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: skewX(-30deg);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Smooth Page Transition */
+        .fade-page {
+            opacity: 0;
+            animation: fadePage 1s forwards;
+        }
+
+        @keyframes fadePage {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body class="fade-page">
+    <div class="bg"></div>
+
+    <!-- LOGO -->
+    <div class="logo">
+        <img src="https://i.imgur.com/foK8WZp.png" alt="Logo" />
+    </div>
+
+    <!-- MAIN BUTTONS -->
+    <div class="container">
+        <a href="#home" class="btn">Home</a>
+        <a href="#about" class="btn">About</a>
+        <a href="#characters" class="btn">Characters</a>
+        <a href="#contact" class="btn">Contact</a>
+    </div>
+</body>
+</html>

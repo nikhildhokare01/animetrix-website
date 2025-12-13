@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite'  // <--- Changed 'Import' to 'import'
 import react from '@vitejs/plugin-react'
 
-// The 'base' property is essential. It must match your repository name exactly.
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   base: '/animetrix-website/', 
